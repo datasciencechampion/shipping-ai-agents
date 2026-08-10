@@ -1,0 +1,20 @@
+{
+  "case_id": "ch01-simple-interaction",
+  "note": "A more ordinary case: a potential interaction a demo would likely handle well.",
+  "patient": {
+    "age": 60,
+    "sex": "M",
+    "weight_kg": 82,
+    "conditions": ["atrial fibrillation"],
+    "egfr_ml_min": 88
+  },
+  "current_medications": [
+    {"drug": "warfarin", "dose": "5 mg", "route": "oral", "frequency": "once daily"}
+  ],
+  "proposed": {
+    "drug": "ciprofloxacin",
+    "dose": "500 mg",
+    "route": "oral",
+    "frequency": "twice daily"
+  }
+}

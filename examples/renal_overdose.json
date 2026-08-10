@@ -1,0 +1,21 @@
+{
+  "case_id": "ch01-renal-overdose",
+  "note": "The Chapter 1 post-mortem case: elderly patient with reduced renal function; a standard adult dose is roughly twice what is safe here.",
+  "patient": {
+    "age": 82,
+    "sex": "F",
+    "weight_kg": 54,
+    "conditions": ["type 2 diabetes", "chronic kidney disease stage 4"],
+    "egfr_ml_min": 22
+  },
+  "current_medications": [
+    {"drug": "metformin", "dose": "500 mg", "route": "oral", "frequency": "twice daily"},
+    {"drug": "lisinopril", "dose": "10 mg", "route": "oral", "frequency": "once daily"}
+  ],
+  "proposed": {
+    "drug": "gabapentin",
+    "dose": "600 mg",
+    "route": "oral",
+    "frequency": "three times daily"
+  }
+}

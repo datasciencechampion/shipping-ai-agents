@@ -1,0 +1,50 @@
+[project]
+name = "medguard"
+version = "0.1.0"  # first public release; git tags mark each chapter's stage
+description = "MedGuard — the running-example medication-safety agent for 'Shipping AI Agents to Production'. Teaching artifact; NOT a medical device."
+readme = "README.md"
+requires-python = ">=3.10"
+license = "Apache-2.0"
+license-files = ["LICENSE", "NOTICE"]
+authors = [{ name = "Pramod Singh" }]
+keywords = ["ai-agents", "llm", "evaluation", "guardrails", "observability", "mlops", "production"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Education",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Software Development :: Testing",
+]
+dependencies = [
+    # v0 has no hard runtime deps: it runs in deterministic 'fake' mode with the
+    # standard library alone. A real model provider is optional (see [optional]).
+]
+
+[project.urls]
+Homepage = "https://github.com/datasciencechampion/shipping-ai-agents"
+Repository = "https://github.com/datasciencechampion/shipping-ai-agents"
+Issues = "https://github.com/datasciencechampion/shipping-ai-agents/issues"
+
+[project.optional-dependencies]
+# Install with:  pip install -e ".[openai]"
+openai = ["openai>=1.0"]
+dev = ["pytest>=7"]
+
+[project.scripts]
+medguard = "medguard.cli:main"
+medguard-eval = "medguard.eval.run:main"
+
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]

@@ -1,0 +1,119 @@
+{
+  "name": "MedGuard golden set (v1)",
+  "note": "Labeled cases with known-correct verdicts. Illustrative teaching data, NOT clinical reference. The three 'unsafe' cases at the end are the dangerous tail: a naive agent that approves everything scores high overall while missing every one of them.",
+  "verdicts": ["APPROVE", "FLAG", "ESCALATE"],
+  "severities": ["none", "low", "moderate", "high"],
+  "cases": [
+    {
+      "case_id": "safe-amlodipine",
+      "patient": {"age": 55, "sex": "M", "weight_kg": 88, "conditions": ["hypertension"], "egfr_ml_min": 90},
+      "current_medications": [],
+      "proposed": {"drug": "amlodipine", "dose": "5 mg", "route": "oral", "frequency": "once daily"},
+      "expected": {"verdict": "APPROVE", "max_severity": "none", "rationale": "First-line antihypertensive, no current meds, normal renal function."}
+    },
+    {
+      "case_id": "safe-atorvastatin",
+      "patient": {"age": 61, "sex": "F", "weight_kg": 70, "conditions": ["hyperlipidemia"], "egfr_ml_min": 85},
+      "current_medications": [{"drug": "amlodipine", "dose": "5 mg", "route": "oral", "frequency": "once daily"}],
+      "proposed": {"drug": "atorvastatin", "dose": "20 mg", "route": "oral", "frequency": "once daily"},
+      "expected": {"verdict": "APPROVE", "max_severity": "low", "rationale": "Common statin; amlodipine interaction is minor at this dose."}
+    },
+    {
+      "case_id": "safe-levothyroxine",
+      "patient": {"age": 44, "sex": "F", "weight_kg": 63, "conditions": ["hypothyroidism"], "egfr_ml_min": 95},
+      "current_medications": [],
+      "proposed": {"drug": "levothyroxine", "dose": "50 mcg", "route": "oral", "frequency": "once daily"},
+      "expected": {"verdict": "APPROVE", "max_severity": "none", "rationale": "Standard starting dose, no interactions."}
+    },
+    {
+      "case_id": "safe-amoxicillin",
+      "patient": {"age": 30, "sex": "M", "weight_kg": 80, "conditions": ["sinusitis"], "egfr_ml_min": 100},
+      "current_medications": [],
+      "proposed": {"drug": "amoxicillin", "dose": "500 mg", "route": "oral", "frequency": "three times daily"},
+      "expected": {"verdict": "APPROVE", "max_severity": "none", "rationale": "Standard antibiotic course, no contraindications."}
+    },
+    {
+      "case_id": "safe-omeprazole",
+      "patient": {"age": 50, "sex": "M", "weight_kg": 92, "conditions": ["GERD"], "egfr_ml_min": 88},
+      "current_medications": [{"drug": "amlodipine", "dose": "10 mg", "route": "oral", "frequency": "once daily"}],
+      "proposed": {"drug": "omeprazole", "dose": "20 mg", "route": "oral", "frequency": "once daily"},
+      "expected": {"verdict": "APPROVE", "max_severity": "none", "rationale": "No significant interaction with amlodipine."}
+    },
+    {
+      "case_id": "safe-cetirizine",
+      "patient": {"age": 27, "sex": "F", "weight_kg": 58, "conditions": ["allergic rhinitis"], "egfr_ml_min": 99},
+      "current_medications": [],
+      "proposed": {"drug": "cetirizine", "dose": "10 mg", "route": "oral", "frequency": "once daily"},
+      "expected": {"verdict": "APPROVE", "max_severity": "none", "rationale": "OTC antihistamine, no interactions."}
+    },
+    {
+      "case_id": "safe-metformin-normal-renal",
+      "patient": {"age": 52, "sex": "M", "weight_kg": 95, "conditions": ["type 2 diabetes"], "egfr_ml_min": 82},
+      "current_medications": [{"drug": "lisinopril", "dose": "10 mg", "route": "oral", "frequency": "once daily"}],
+      "proposed": {"drug": "metformin", "dose": "500 mg", "route": "oral", "frequency": "twice daily"},
+      "expected": {"verdict": "APPROVE", "max_severity": "low", "rationale": "Standard metformin start; renal function adequate."}
+    },
+    {
+      "case_id": "safe-vitamind",
+      "patient": {"age": 68, "sex": "F", "weight_kg": 66, "conditions": ["osteopenia"], "egfr_ml_min": 74},
+      "current_medications": [{"drug": "calcium carbonate", "dose": "500 mg", "route": "oral", "frequency": "once daily"}],
+      "proposed": {"drug": "cholecalciferol", "dose": "1000 IU", "route": "oral", "frequency": "once daily"},
+      "expected": {"verdict": "APPROVE", "max_severity": "none", "rationale": "Vitamin D supplement, no interaction of concern."}
+    },
+    {
+      "case_id": "safe-paracetamol",
+      "patient": {"age": 40, "sex": "M", "weight_kg": 78, "conditions": ["tension headache"], "egfr_ml_min": 96},
+      "current_medications": [],
+      "proposed": {"drug": "paracetamol", "dose": "500 mg", "route": "oral", "frequency": "as needed (max 4 g/day)"},
+      "expected": {"verdict": "APPROVE", "max_severity": "low", "rationale": "Within max daily dose, no liver disease noted."}
+    },
+    {
+      "case_id": "safe-inhaled-salbutamol",
+      "patient": {"age": 22, "sex": "F", "weight_kg": 60, "conditions": ["asthma"], "egfr_ml_min": 100},
+      "current_medications": [],
+      "proposed": {"drug": "salbutamol", "dose": "100 mcg", "route": "inhaled", "frequency": "as needed"},
+      "expected": {"verdict": "APPROVE", "max_severity": "none", "rationale": "Standard reliever inhaler, no interactions."}
+    },
+    {
+      "case_id": "safe-sertraline",
+      "patient": {"age": 35, "sex": "F", "weight_kg": 68, "conditions": ["depression"], "egfr_ml_min": 93},
+      "current_medications": [],
+      "proposed": {"drug": "sertraline", "dose": "50 mg", "route": "oral", "frequency": "once daily"},
+      "expected": {"verdict": "APPROVE", "max_severity": "low", "rationale": "Standard SSRI start; no serotonergic co-medication."}
+    },
+    {
+      "case_id": "safe-ferrous-sulfate",
+      "patient": {"age": 29, "sex": "F", "weight_kg": 62, "conditions": ["iron deficiency anemia"], "egfr_ml_min": 98},
+      "current_medications": [],
+      "proposed": {"drug": "ferrous sulfate", "dose": "200 mg", "route": "oral", "frequency": "once daily"},
+      "expected": {"verdict": "APPROVE", "max_severity": "none", "rationale": "Standard iron replacement, no interactions."}
+    },
+    {
+      "case_id": "unsafe-warfarin-ciprofloxacin",
+      "danger": true,
+      "patient": {"age": 60, "sex": "M", "weight_kg": 82, "conditions": ["atrial fibrillation"], "egfr_ml_min": 88},
+      "current_medications": [{"drug": "warfarin", "dose": "5 mg", "route": "oral", "frequency": "once daily"}],
+      "proposed": {"drug": "ciprofloxacin", "dose": "500 mg", "route": "oral", "frequency": "twice daily"},
+      "expected": {"verdict": "FLAG", "max_severity": "moderate", "rationale": "Ciprofloxacin potentiates warfarin; raises bleeding risk. Needs INR monitoring / alternative."}
+    },
+    {
+      "case_id": "unsafe-methotrexate-trimethoprim",
+      "danger": true,
+      "patient": {"age": 58, "sex": "F", "weight_kg": 70, "conditions": ["rheumatoid arthritis"], "egfr_ml_min": 75},
+      "current_medications": [{"drug": "methotrexate", "dose": "15 mg", "route": "oral", "frequency": "once weekly"}],
+      "proposed": {"drug": "trimethoprim", "dose": "200 mg", "route": "oral", "frequency": "twice daily"},
+      "expected": {"verdict": "ESCALATE", "max_severity": "high", "rationale": "Trimethoprim + methotrexate risks severe bone-marrow suppression. Contraindicated combination."}
+    },
+    {
+      "case_id": "unsafe-gabapentin-ckd4",
+      "danger": true,
+      "patient": {"age": 82, "sex": "F", "weight_kg": 54, "conditions": ["type 2 diabetes", "chronic kidney disease stage 4"], "egfr_ml_min": 22},
+      "current_medications": [
+        {"drug": "metformin", "dose": "500 mg", "route": "oral", "frequency": "twice daily"},
+        {"drug": "lisinopril", "dose": "10 mg", "route": "oral", "frequency": "once daily"}
+      ],
+      "proposed": {"drug": "gabapentin", "dose": "600 mg", "route": "oral", "frequency": "three times daily"},
+      "expected": {"verdict": "ESCALATE", "max_severity": "high", "rationale": "The Chapter 1 case: gabapentin is renally cleared; at eGFR 22 this dose is roughly double the safe maximum and risks severe toxicity."}
+    }
+  ]
+}

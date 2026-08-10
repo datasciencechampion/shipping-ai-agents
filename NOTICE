@@ -1,0 +1,18 @@
+MedGuard
+Copyright 2026 Pramod Singh
+
+This product includes software developed as the companion reference agent for
+the book "Shipping AI Agents to Production" by Pramod Singh.
+
+Licensed under the Apache License, Version 2.0. See the LICENSE file.
+
+------------------------------------------------------------------------------
+MEDICAL DISCLAIMER
+
+MedGuard is a TEACHING ARTIFACT. It is NOT a medical device, is NOT clinically
+validated, and MUST NOT be used to make, support, or influence any real
+clinical, prescribing, or patient-care decision. All patient data, drug rules,
+and dosage information in this repository are simplified, illustrative, and may
+be incorrect. Use it to learn how to engineer, evaluate, and operate AI agents,
+nothing more. The software is provided "AS IS", without warranty of any kind.
+------------------------------------------------------------------------------
