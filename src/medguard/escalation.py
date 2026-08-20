@@ -4,7 +4,7 @@ Escalation is a first-class outcome, not an error path (Chapter 11). Three thing
 send a case to a human: a high-severity finding, a tool failure, or low decision
 confidence. This module owns the confidence-threshold routing, the queue a
 pharmacist actually works from, and the feedback loop that turns each resolved
-escalation into a new labeled golden case (Chapter 17).
+escalation into a new labeled golden case (Chapter 16).
 """
 
 from __future__ import annotations
