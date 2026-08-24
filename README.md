@@ -84,8 +84,37 @@ code/
 ```
 
 > The code evolves cumulatively in this single tree (v0, v1, v1.1, v2, v3, v4.1
-> coexist). In a published companion repo these stages would be git tags, as
-> Appendix E describes; here they're modules added in book order.
+> coexist). Git tags `v0` … `v5.2` mark the chapter each stage was introduced;
+> use `--agent` (for example `--agent v0` or `--agent v41`) to run that stage.
+
+## Walk every remaining stage
+
+The printed book (Appendix H) walks **v0 → v1 → v4.1** in detail. That is the
+thesis: a dangerous demo, a number that exposes the tail, then a veto that makes
+the approval impossible.
+
+This section is the rest of the map. Stay in the venv from setup. The tree is
+cumulative, so you do not need a new checkout for each command. `pytest -q`
+prints one `.` per passing test; `N passed` means that chapter's property still
+holds.
+
+| Tag | Chapter | Command | What to notice |
+| --- | --- | --- | --- |
+| `v1.1` | Testing | `pytest -q tests/test_replay.py tests/test_verdict.py tests/test_scoring.py tests/test_agent.py` | `test_replayed_scoring_reproduces_the_dangerous_tail` pins the 80% / 3-unsafe result |
+| `v2` | Observability | `pytest -q tests/test_trace.py` | PHI is `***REDACTED***` on spans (`redact` in `src/medguard/trace.py`) |
+| `v2.1` | Incidents | `pytest -q tests/test_ops.py` | Kill switch returns `ESCALATE`, not an exception |
+| `v3` | Control flow | `medguard-eval --agent v3` then `pytest -q tests/test_pipeline.py` | About 93%, **1 unsafe** (renal overdose). Structured flow, no dose veto yet |
+| `v3.1` | Grounding | `pytest -q tests/test_grounding.py` | Invented citations force `ESCALATE` |
+| `v3.2` | Tools | `pytest -q tests/test_tools_reliability.py` | Missing `drug` is a `ToolError` |
+| `v3.3` | Memory | `pytest -q tests/test_memory.py` | Sessions cannot see each other's keys |
+| `v4` | Human-in-the-loop | `pytest -q tests/test_escalation.py` | Low confidence routes to a human |
+| `v4.1` | Guardrails | `medguard-eval --agent v41` | 100%, **0 unsafe** (already in Appendix H) |
+| `v4.2` | Cost / latency | `pytest -q tests/test_budget.py` | Budget overrun is a tracked failure |
+| `v4.3` | Security | `pytest -q tests/test_audit.py` | Name / MRN stripped from the provider payload |
+| `v5` | Rollout | `pytest -q tests/test_rollout.py` | Candidate that *approves* where current *escalates* is a safety regression |
+| `v5.1` | Continuous eval | `pytest -q tests/test_continuous.py` | Unsafe-approval rate on a live sample |
+| `v5.2` | Scaling | `pytest -q tests/test_runtime.py` | Token bucket limits; overload degrades to a safe verdict |
+| Capstone | Ch 19 | `pytest -q tests/test_capstone.py` then `pytest -q` | Chapter 1 overdose cannot be approved; full suite stays green |
 
 ## Running the tests (v1.1)
 
