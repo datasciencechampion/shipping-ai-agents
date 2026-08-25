@@ -36,8 +36,9 @@ chapter describes.
 ## Design intent
 
 - **Framework-agnostic core.** The agent's control loop, tools, grounding,
-  guardrails, and eval hooks are plain code behind small interfaces. Framework
-  ports (LangGraph, vendor SDKs) live in the book's appendices.
+  guardrails, and eval hooks are plain code behind small interfaces. Thin
+  SDK adapters and framework wrappers live in `ports/` (one v4.1 slice, not
+  a second product). Book mapping: Appendices A and B.
 - **Every subsystem is inspectable.** Tracing, evals, and guardrails are
   first-class, not bolted on.
 
@@ -77,9 +78,10 @@ code/
   src/medguard/continuous.py    # v5.1: online sampling + drift monitor + feedback merge
   src/medguard/runtime.py       # v5.2: rate limit + backpressure + safe degradation + concurrency
   src/medguard/capstone.py      # Ch 19: review_end_to_end composing every subsystem
+  ports/                            # one v4.1 slice + adapters/wrappers (see ports/README.md)
   evals/
     golden_set.json             # 15 labeled cases (12 safe, 3 dangerous)
-  tests/                        # deterministic + snapshot/replay tests (106 total)
+  tests/                        # deterministic + snapshot/replay tests
     fixtures/v0_golden_outputs.json
 ```
 
@@ -116,6 +118,23 @@ holds.
 | `v5.2` | Scaling | `pytest -q tests/test_runtime.py` | Token bucket limits; overload degrades to a safe verdict |
 | Capstone | Ch 19 | `pytest -q tests/test_capstone.py` then `pytest -q` | Chapter 1 overdose cannot be approved; full suite stays green |
 
+## Framework and SDK ports
+
+One slice, same golden set, independent veto after the reasoner. Not four full
+MedGuards. Details: [`ports/README.md`](ports/README.md).
+
+| Port | What it is | Offline check |
+| --- | --- | --- |
+| `ports/openai/` | OpenAI SDK adapter (`complete`) | `PYTHONPATH=src:. python -m ports.openai` |
+| `ports/anthropic/` | Anthropic SDK adapter | `PYTHONPATH=src:. python -m ports.anthropic` |
+| `ports/langgraph/` | Graph calls MedGuard core; veto after invoke | `PYTHONPATH=src:. python -m ports.langgraph` |
+| `ports/adk/` | Google ADK: MedGuard as a tool; veto in Python | `PYTHONPATH=src:. python -m ports.adk` |
+| `ports/agno/` | Agno: MedGuard as a tool; veto in Python | `PYTHONPATH=src:. python -m ports.agno` |
+
+```bash
+PYTHONPATH=src:. python -m ports.run_eval    # 100%, 0 unsafe (same gate as v4.1)
+```
+
 ## Running the tests (v1.1)
 
 The suite is deterministic, offline (no API key), and sub-second:
@@ -123,7 +142,7 @@ The suite is deterministic, offline (no API key), and sub-second:
 ```bash
 cd shipping-ai-agents
 python3 -m venv .venv && .venv/bin/pip install pytest   # once
-.venv/bin/python -m pytest -q                            # 106 tests
+.venv/bin/python -m pytest -q                            # includes ports slice
 ```
 
 It unit-tests the prompt builder, verdict extractor, and scorer, documents the

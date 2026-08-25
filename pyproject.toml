@@ -32,6 +32,8 @@ Issues = "https://github.com/datasciencechampion/shipping-ai-agents/issues"
 [project.optional-dependencies]
 # Install with:  pip install -e ".[openai]"
 openai = ["openai>=1.0"]
+anthropic = ["anthropic>=0.40"]
+langgraph = ["langgraph>=0.2"]
 dev = ["pytest>=7"]
 
 [project.scripts]
@@ -46,5 +48,5 @@ build-backend = "setuptools.build_meta"
 where = ["src"]
 
 [tool.pytest.ini_options]
-pythonpath = ["src"]
+pythonpath = ["src", "."]
 testpaths = ["tests"]

@@ -32,3 +32,6 @@ jobs:
       # gate the book argues every change should be measured against.
       - name: Eval safety gate (finished agent, fake mode)
         run: PYTHONPATH=src python -m medguard.eval.run --agent v41 --fake
+
+      - name: Port slice safety gate (same golden set)
+        run: PYTHONPATH=src:. python -m ports.run_eval
